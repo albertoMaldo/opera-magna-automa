@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#244569">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+<title>Opera Magna · Rival</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@500;600;700&display=swap">
+<style>
+:root{--bg:#f4efe4;--card:#fffaf0;--ink:#1f2a36;--mut:#5d6773;--navy:#244569;--terra:#c06452;--gold:#b48a3c;--line:#d9cfbb;--chip:#e9e1cf}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141b24;--card:#1d2733;--ink:#ebe5d8;--mut:#a3abb5;--navy:#8fb2da;--terra:#e08b78;--gold:#d8b46a;--line:#334253;--chip:#26323f}}
+:root[data-theme="dark"]{--bg:#141b24;--card:#1d2733;--ink:#ebe5d8;--mut:#a3abb5;--navy:#8fb2da;--terra:#e08b78;--gold:#d8b46a;--line:#334253;--chip:#26323f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.45 'EB Garamond',Georgia,serif}
+.wrap{max-width:760px;margin:0 auto;padding:18px max(16px,env(safe-area-inset-left)) 60px max(16px,env(safe-area-inset-right))}
+h1{font:700 22px 'Montserrat',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);margin:4px 0 2px}
+.sub{color:var(--mut);font-style:italic;margin:0 0 14px}
+h2{font:700 15px 'Montserrat',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);margin:22px 0 6px}
+h3{font:600 14px 'Montserrat',sans-serif;color:var(--terra);margin:14px 0 4px}
+nav{display:flex;gap:6px;border-bottom:2px solid var(--line);margin-bottom:14px;flex-wrap:wrap}
+nav button{background:none;border:0;padding:8px 12px;font:600 13px 'Montserrat',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+nav button.on{color:var(--navy);border-color:var(--terra)}
+.btn{font:600 13px 'Montserrat',sans-serif;letter-spacing:.05em;text-transform:uppercase;border:0;border-radius:6px;padding:11px 16px;cursor:pointer;background:var(--navy);color:#fff}
+:root[data-theme="dark"] .btn{color:#141b24}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#141b24}}
+.btn.alt{background:var(--chip);color:var(--ink)}
+.btn.t{background:var(--terra)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{border:0;background:var(--card);color:var(--ink);padding:9px 12px;font:600 12px 'Montserrat',sans-serif;cursor:pointer}
+.seg button.on{background:var(--navy);color:var(--bg)}
+.status{font:500 13px 'Montserrat',sans-serif;color:var(--mut);margin:10px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;box-shadow:0 2px 0 var(--line)}
+.top{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.f{background:var(--chip);border-radius:8px;padding:8px 6px;text-align:center}
+.f small{display:block;font:600 10px 'Montserrat',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.f b{display:block;font:700 17px 'Montserrat',sans-serif;color:var(--navy);overflow-wrap:anywhere}
+.act{font:700 18px 'Montserrat',sans-serif;color:var(--terra);margin:2px 0 8px}
+ol.steps{margin:0;padding-left:22px}
+ol.steps li{margin:6px 0}
+.fb{color:var(--mut);font-size:15px;margin-top:2px}
+.fb i{color:var(--ink)}
+.empty{color:var(--mut);font-style:italic;text-align:center;padding:30px 10px}
+textarea,input[type=number]{width:100%;font:16px 'EB Garamond',serif;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:8px}
+.log{font-size:15px;max-height:420px;overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 12px}
+.log div{border-bottom:1px dashed var(--line);padding:4px 0}
+.log .n{color:var(--terra)}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) 110px;gap:6px 10px;align-items:center}
+.tot{font:700 22px 'Montserrat',sans-serif;color:var(--navy)}
+.hide{display:none}
+ul{padding-left:20px}li{margin:3px 0}
+.note{background:var(--chip);border-left:4px solid var(--gold);padding:8px 12px;border-radius:4px;font-size:15.5px}
+table{border-collapse:collapse;width:100%;font-size:15px}td,th{border-bottom:1px solid var(--line);padding:4px 6px;text-align:left}
+@media (max-width:480px){.top{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+
+<div class="wrap">
+<h1>Opera Magna · El Rival</h1>
+<p class="sub">Modo solitario v0.1 — mazo del rival automático. Tú llevas su tablero; la app solo decide.</p>
+
+<nav id="tabs">
+<button data-t="juego" class="on">Partida</button>
+<button data-t="reglas">Reglas</button>
+<button data-t="puntos">Puntuación</button>
+<button data-t="registro">Registro y notas</button>
+</nav>
+
+<section id="juego">
+<div class="row">
+<div class="seg" id="dif"><button data-d="facil">Fácil</button><button data-d="normal" class="on">Normal</button><button data-d="dificil">Difícil</button></div>
+<button class="btn alt" id="nueva">Nueva partida</button>
+</div>
+<div class="status" id="st"></div>
+<div class="row"><button class="btn t" id="robar">Turno del rival · robar carta</button><button class="btn alt" id="bloqueo">Rival bloqueado · carta extra</button><button class="btn alt" id="deshacer">Deshacer</button></div>
+<div id="carta"><div class="card empty">Prepara la partida (pestaña Reglas) y pulsa «Turno del rival» tras cada turno tuyo.</div></div>
+</section>
+
+<section id="reglas" class="hide">
+<div class="note">Primera versión para probar. Si una regla no resuelve una situación, decide lo más perjudicial para ti, apúntalo en «Registro y notas» y sigue.</div>
+
+<h2>Preparación</h2>
+<ul>
+<li>Prepara una partida normal de <b>2 jugadores</b> (retira del Mercado lo indicado para 2: 4×A, 6×B, 6×C).</li>
+<li>El rival toma un color, un <b>Tablero de Taller sobrante</b>, sus 3 Mercaderes, sus 20 Fichas de Jugador y su marcador de PV. No recibe Edificios iniciales ni Mercancías.</li>
+<li>Pon <b>un</b> Certificado del rival en la <b>columna 4</b> de una pista de su tablero: su posición marca su <b>nivel de Certificado</b> igual que para ti (columna 6 = nivel 1, 8 = nivel 2, 10 = nivel 3; empieza en nivel 0) y vale para <b>todos</b> los Productos.</li>
+<li>Empiezas tú: eres el jugador <b>1</b> y el rival el <b>2</b>. Mercaderes según la leyenda de cada Ciudad: <b>verde</b>, los dos arriba; <b>naranja</b>, tú abajo y el rival arriba; <b>azul</b>, tú arriba y el rival abajo.</li>
+</ul>
+
+<h2>Turno del rival</h2>
+<p>Pulsa el botón y resuelve la carta <b>en este orden</b>:</p>
+<h3>1 · Mercader</h3>
+<p>En la <b>Ciudad</b> indicada, pasa el Mercader del rival a la <b>otra Zona</b> (de Coste a Beneficio o al revés). Desliza las cartas de la Zona a la que llega como harías tú, descarta la de la izquierda y coloca en el hueco derecho la carta del Mercado en la <b>posición</b> indicada (contando desde la izquierda; si no existe, la última). Rellena el Mercado. El rival <b>no paga ni cobra</b>.</p>
+<p class="fb">Siempre es válido: el rival tiene un Mercader en cada Ciudad. Si tu Mercader está allí, comparten Zona con normalidad.</p>
+<h3>2 · Acción principal</h3>
+<ul>
+<li><b>Construir P / M / G</b>: toma, de los 2 Edificios visibles de ese tamaño, el <b>más cercano a su mazo</b> (el de arriba) y repone. Colócalo en la casilla de ese tamaño del <b>lado derecho</b> del tablero; si está ocupada, en el izquierdo. Si no hay Edificio de ese tamaño: tamaño inferior; si tampoco hay: <b>bloqueo</b>.</li>
+<li><b>Certificado +1 / +2</b>: avanza su Certificado una o dos columnas. Cada paso que no pueda dar por estar al final de la pista: 1 PV.</li>
+<li><b>Preparar</b>: no hace nada salvo los envíos.</li>
+</ul>
+<h3>3 · Envíos a la Ópera</h3>
+<p>Carros = casillas del <b>lado derecho</b> ocupadas (0–3). Envía <b>una Ficha por carro</b> a la Ópera Magna, cada una a la <b>Obra válida de nivel más alto</b> de la <b>columna</b> indicada.</p>
+<p>Una Obra es inválida si: ya tiene ficha del rival · alguna Obra inferior de su columna está vacía · su nivel supera el nivel de Certificado del rival. <b>El tipo de Producto de la Obra no importa</b> para el rival.</p>
+<p class="fb">Inválida → Obra válida más alta de la columna → columna siguiente (1→2→3→4→1) → si no hay ninguna: ese envío se pierde y hay <b>bloqueo</b>.</p>
+<h3>Bloqueo</h3>
+<p>Si en este turno el rival no pudo construir o perdió algún envío, pulsa <b>«Rival bloqueado · carta extra»</b>: roba otra carta y resuelve solo su <b>acción principal</b> y sus <b>envíos</b> (sin Mercader ni Mercado). Como máximo una carta extra por turno, y la carta extra no encadena otra. Así, cuanto más lo bloqueas, más fuerte golpea.</p>
+<p>Con nivel 0 el rival <b>no envía</b> (ni gana PV por ello).</p>
+<p>Si el rival es el <b>primero</b> en una Obra, no aplica su efecto: gana <b>1 PV</b>. Si se le acaban las fichas, cada envío da 1 PV.</p>
+
+<h2>Final de partida</h2>
+<p>Como en el reglamento (Mercado agotado). Puntúa al rival en la pestaña Puntuación.</p>
+
+<h2>Desempates fijos</h2>
+<ul><li>Edificios: el más cercano a su mazo.</li><li>Obras: la de nivel más alto de la columna indicada.</li><li>Tú nunca eliges por el rival.</li></ul>
+
+<h2>Mazo</h2>
+<table><tr><th>Dificultad</th><th>Cartas</th></tr>
+<tr><td>Fácil</td><td>13: Construir P×2, M×2, G×1, Certificado +1×3, +2×1, Preparar×4</td></tr>
+<tr><td>Normal</td><td>13: Construir P×2, M×2, G×1, Certificado +1×2, +2×2, Preparar×4</td></tr>
+<tr><td>Difícil</td><td>13: Construir P×2, M×2, G×1, Certificado +1×2, +2×3, Preparar×3</td></tr></table>
+<p class="fb">Al agotarse el mazo se baraja de nuevo.</p>
+</section>
+
+<section id="puntos" class="hide">
+<h2>Puntuación final del rival</h2>
+<p class="fb">Provisional — apunta en notas si sale muy alta o baja.</p>
+<div class="grid2" id="calc"></div>
+<p>Total: <span class="tot" id="tot">0</span> PV</p>
+</section>
+
+<section id="registro" class="hide">
+<h2>Nota de prueba</h2>
+<textarea id="nota" rows="3" placeholder="Qué ha pasado, qué no se entendía, qué se ha decidido…"></textarea>
+<div class="row" style="margin-top:8px"><button class="btn" id="addnota">Añadir nota</button><button class="btn alt" id="copiar">Copiar registro</button><span class="status" id="cp"></span></div>
+<h2>Registro</h2>
+<div class="log" id="log"></div>
+</section>
+</div>
+
+<script>
+const SIZES={P:'Pequeño',M:'Mediano',G:'Grande'};
+const BASE={
+ facil:['B-P','B-P','B-M','B-M','B-G','C','C','C','C2','X','X','X','X'],
+ normal:['B-P','B-P','B-M','B-M','B-G','C','C','C2','C2','X','X','X','X'],
+ dificil:['B-P','B-P','B-M','B-M','B-G','C','C','C2','C2','C2','X','X','X']};
+const ROMAN=['Verde','Naranja','Azul'];
+let S={dif:'normal',deck:[],turn:0,round:1,log:[],hist:[],cur:null,score:{}};
+function save(){try{localStorage.setItem('om-rival',JSON.stringify(S))}catch(e){}}
+function load(){try{const v=JSON.parse(localStorage.getItem('om-rival'));if(v&&v.deck)S=Object.assign(S,v)}catch(e){}}
+function rnd(n){return Math.floor(Math.random()*n)}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
+function makeDeck(){
+ const acts=shuffle(BASE[S.dif].slice());
+ // balance cities, zones and columns across the deck
+ const n=acts.length;
+ const city=shuffle(Array.from({length:n},(_,i)=>i%3+1));
+ const zone=shuffle(Array.from({length:n},(_,i)=>i%2?'Beneficio':'Coste'));
+ const col=shuffle(Array.from({length:n},(_,i)=>i%4+1));
+ const pos=shuffle(Array.from({length:n},(_,i)=>i%3+1));
+ return acts.map((a,i)=>({a,city:city[i],zone:zone[i],col:col[i],pos:pos[i]}));
+}
+function actText(c){
+ if(c.a.startsWith('B-'))return 'Construir '+SIZES[c.a[2]];
+ if(c.a==='C')return 'Certificado +1';
+ if(c.a==='C2')return 'Certificado +2';
+ return 'Preparar';
+}
+function render(){
+ document.querySelectorAll('#dif button').forEach(b=>b.classList.toggle('on',b.dataset.d===S.dif));
+ document.getElementById('st').textContent=`Turno ${S.turn} del rival · ${S.deck.length} cartas en el mazo · dificultad ${S.dif}`;
+ const c=S.cur,el=document.getElementById('carta');
+ if(!c){el.innerHTML='<div class="card empty">Prepara la partida (pestaña Reglas) y pulsa «Turno del rival» tras cada turno tuyo.</div>'}
+ else{
+  const other=c.zone==='Coste'?'Beneficio':'Coste';
+  const next=ROMAN[c.city%3];
+  let main='';
+  if(c.a.startsWith('B-')){
+   const s=SIZES[c.a[2]];
+   main=`<li><b>${actText(c)}</b>: el Edificio ${s.toLowerCase()} más cercano a su mazo (el de arriba); repone → casilla ${s.toLowerCase()} del lado <b>derecho</b>; si ocupada, izquierdo.<div class="fb">Sin Edificio de ese tamaño → tamaño inferior → <i>bloqueo</i>.</div></li>`;
+  }else if(c.a==='C'||c.a==='C2'){
+   const k=c.a==='C2'?2:1;
+   main=`<li><b>Certificado +${k}</b>: avanza ${k===2?'dos columnas':'una columna'} su Certificado.<div class="fb">Cada paso que no pueda dar por estar al final de la pista → <i>1 PV</i>.</div></li>`;
+  }else main=`<li><b>Preparar</b>: sin acción principal.</li>`;
+  el.innerHTML=`<div class="card">
+   <div class="top">
+    <div class="f"><small>Ciudad</small><b>${ROMAN[c.city-1]}</b></div>
+    <div class="f"><small>Mercado</small><b>${c.pos}ª carta</b></div>
+    <div class="f"><small>Columna Ópera</small><b>${c.col}</b></div>
+   </div>
+   <div class="act">${c.extra?'Carta extra · ':''}${actText(c)}</div>
+   <ol class="steps">
+    ${c.extra?'<li><b>Carta extra</b>: ignora Ciudad y Mercado.</li>':`<li><b>Mercader</b> → Ciudad ${ROMAN[c.city-1]}: cámbialo a la <b>otra Zona</b>. Desliza esa Zona, descarta la izquierda, mete la ${c.pos}ª carta del Mercado. Rellena el Mercado.</li>`}
+    ${main}
+    <li><b>Envíos</b>: una Ficha por carro (casillas derechas ocupadas) a la Obra válida más alta de la <b>columna ${c.col}</b>.<div class="fb">Inválida (ya enviado · planta inferior incompleta · nivel &gt; Certificado) → otra Obra de la columna ${c.col} → columna ${c.col%4+1} → … → envío perdido (<i>bloqueo</i>). <b>Si ya tiene ficha en todas las Obras a su alcance, es bloqueo.</b> Primero en una Obra → <i>1 PV</i> en vez del efecto.</div></li>
+   </ol>${(!c.extra&&!c.blocked)?'<div class="row" style="margin-top:12px"><button class="btn t" onclick="draw(true)">¿No pudo construir o perdió un envío? → Carta extra</button></div>':''}</div>`;
+ }
+ const lg=document.getElementById('log');
+ lg.innerHTML=S.log.length?S.log.map(l=>`<div class="${l.startsWith('NOTA')?'n':''}">${esc(l)}</div>`).join(''):'<div class="fb">Vacío.</div>';
+ lg.scrollTop=lg.scrollHeight;
+ renderCalc();save();
+}
+function esc(s){return s.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))}
+function draw(extra){
+ if(extra&&(!S.cur||S.cur.extra||S.cur.blocked))return;
+ if(extra)S.cur.blocked=true;
+ S.hist.push(JSON.stringify({deck:S.deck,turn:S.turn,cur:S.cur,log:S.log.length}));
+ if(S.hist.length>30)S.hist.shift();
+ if(!S.deck.length){S.deck=makeDeck();S.log.push('— mazo barajado —')}
+ S.cur=S.deck.shift();if(extra)S.cur.extra=true;else S.turn++;
+ const c=S.cur;
+ S.log.push(`T${S.turn}${extra?' (extra por bloqueo)':''}: ${actText(c)} · Ciudad ${ROMAN[c.city-1]} · Mercado ${c.pos} · Columna ${c.col}`);
+ render();
+}
+function undo(){const h=S.hist.pop();if(!h)return;const v=JSON.parse(h);S.deck=v.deck;S.turn=v.turn;S.cur=v.cur;S.log=S.log.slice(0,v.log);render()}
+function nueva(){
+ S.deck=makeDeck();S.turn=0;S.cur=null;S.hist=[];S.score={};
+ S.log.push(`=== Nueva partida (${S.dif}) ${new Date().toLocaleString('es-ES')} ===`);render();
+}
+const FIELDS=[
+ ['bp','Edificios pequeños (×2)',2],['bm','Edificios medianos (×3)',3],['bg','Edificios grandes (×4)',4],
+ ['cert','Nivel de Certificado 0–3 (×4: vale por sus 4 pistas)',4],
+ ['o1','Fichas en Obras de nivel 1 (×1)',1],['o2','… nivel 2 (×2)',2],['o3','… nivel 3 (×3)',3],
+ ['op','Jugadores con menos fichas en la Ópera que el rival (×2)',2],
+ ['pv','PV acumulados en el marcador',1],
+ ['pos','Casillas de su tablero con al menos 1 Edificio (0–6)',0]];
+const EVO={0:0,1:0,2:1,3:2,4:4,5:7,6:10};
+function renderCalc(){
+ const g=document.getElementById('calc');
+ if(!g.childElementCount){
+  g.innerHTML=FIELDS.map(([k,l])=>`<label for="f-${k}">${l}</label><input type="number" min="0" id="f-${k}" data-k="${k}">`).join('')+
+  `<label>Evolución del Taller (casillas: 2→1, 3→2, 4→4, 5→7, 6→10)</label><span id="evo">0</span>`;
+  g.querySelectorAll('input').forEach(i=>i.addEventListener('input',()=>{S.score[i.dataset.k]=+i.value||0;renderCalc()}));
+ }
+ g.querySelectorAll('input').forEach(i=>{if(document.activeElement!==i)i.value=S.score[i.dataset.k]||''});
+ const v=k=>S.score[k]||0;
+ const evo=EVO[Math.min(v('pos'),6)]||0;
+ document.getElementById('evo').textContent=evo;
+ let t=evo;FIELDS.forEach(([k,,m])=>t+=v(k)*m);
+ document.getElementById('tot').textContent=t;
+}
+document.getElementById('tabs').addEventListener('click',e=>{const t=e.target.dataset.t;if(!t)return;
+ document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+ ['juego','reglas','puntos','registro'].forEach(id=>document.getElementById(id).classList.toggle('hide',id!==t));});
+document.getElementById('dif').addEventListener('click',e=>{const d=e.target.dataset.d;if(!d)return;S.dif=d;nueva()});
+document.getElementById('nueva').onclick=nueva;
+document.getElementById('robar').onclick=()=>draw(false);
+document.getElementById('bloqueo').onclick=()=>draw(true);
+document.getElementById('deshacer').onclick=undo;
+document.getElementById('addnota').onclick=()=>{const t=document.getElementById('nota');if(!t.value.trim())return;
+ S.log.push(`NOTA (T${S.turn}): ${t.value.trim()}`);t.value='';render()};
+document.getElementById('copiar').onclick=async()=>{
+ const txt=S.log.join('\n')+`\n\nPuntuación rival: ${document.getElementById('tot').textContent} PV `+JSON.stringify(S.score);
+ const cp=document.getElementById('cp');
+ try{await navigator.clipboard.writeText(txt);cp.textContent='Copiado'}catch(e){
+  const t=document.getElementById('nota');t.value=txt;t.select();cp.textContent='Selecciona y copia el texto de arriba'}};
+load();if(!S.deck.length&&!S.cur)S.deck=makeDeck();render();
+</script>
+
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
+</body>
+</html>
