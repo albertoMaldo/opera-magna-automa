@@ -3,7 +3,7 @@
 Versión original: Ghiberti envía una ficha por cada Carro (casilla derecha ocupada).
 
 ## Contenido
-- `pwa/`: aplicación web instalable (mazo del rival, reglas, puntuación y registro). Ábrela en https://TU-USUARIO.github.io/opera-magna-automa/v1/pwa/ desde el móvil: Android → «Instalar aplicación»; iPhone → Compartir → «Añadir a pantalla de inicio». Funciona sin conexión tras la primera visita.
+- `pwa/`: aplicación web instalable (mazo del rival, reglas, puntuación y registro). Ábrela en https://albertoMaldo.github.io/opera-magna-automa/v1/pwa/ desde el móvil: Android → «Instalar aplicación»; iPhone → Compartir → «Añadir a pantalla de inicio». Funciona sin conexión tras la primera visita.
 - Mazos imprimibles y hoja de ayuda: disponibles bajo petición.
 
 ## Mazos (13 cartas)
