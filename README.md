@@ -1,4 +1,4 @@
-# Opera Magna · Lorenzo Ghiberti, modo solitario
+# Opera Magna · Lorenzo Ghiberti - modo solitario
 
 Modo solitario no oficial para Opera Magna: Lorenzo Ghiberti, rival de Brunelleschi, se convierte en un automa con un mazo de 13 cartas, tres niveles de dificultad, hoja de ayuda y app web.
 
