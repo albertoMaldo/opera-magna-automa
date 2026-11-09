@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -61,33 +61,38 @@ ul{padding-left:20px}li{margin:3px 0}
 .note{background:var(--chip);border-left:4px solid var(--gold);padding:8px 12px;border-radius:4px;font-size:15.5px}
 table{border-collapse:collapse;width:100%;font-size:15px}td,th{border-bottom:1px solid var(--line);padding:4px 6px;text-align:left}
 @media (max-width:480px){.top{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.langbar{display:flex;justify-content:flex-end;margin-bottom:-6px}
+.langbar .seg button{padding:5px 10px;font-size:11px}
+.credit{margin-top:28px;text-align:center;font:500 12px 'Montserrat',sans-serif;color:var(--mut)}
 </style>
 
 <div class="wrap">
+<div class="langbar"><div class="seg" id="lang"><button data-l="es">ES</button><button data-l="en">EN</button><button data-l="it">IT</button></div></div>
 <h1>Lorenzo Ghiberti</h1>
-<p class="sub">Modo solitario para Opera Magna · v2 — Tú llevas su tablero; la app solo decide.</p>
-<p class="ctx">Florencia, 1418. En 1401 Lorenzo Ghiberti derrotó a Brunelleschi en el concurso de las puertas del Baptisterio; ahora comparte con él la dirección de la cúpula de Santa Maria del Fiore. No paga, no espera y no olvida: cada Obra que no reclames, él la hará suya.</p>
+<p class="sub" data-i="sub"></p>
+<p class="ctx" data-i="ctx"></p>
 
 <nav id="tabs">
-<button data-t="juego" class="on">Partida</button>
-<button data-t="reglas">Reglas</button>
-<button data-t="puntos">Puntuación</button>
-<button data-t="registro">Registro y notas</button>
+<button data-t="juego" class="on" data-i="tab_game"></button>
+<button data-t="reglas" data-i="tab_rules"></button>
+<button data-t="puntos" data-i="tab_score"></button>
+<button data-t="registro" data-i="tab_log"></button>
 </nav>
 
 <section id="juego">
 <div class="row">
-<div class="seg" id="dif"><button data-d="facil">Fácil</button><button data-d="normal" class="on">Normal</button><button data-d="dificil">Difícil</button></div>
-<button class="btn alt" id="nueva">Nueva partida</button>
+<div class="seg" id="dif"><button data-d="facil" data-i="d_facil"></button><button data-d="normal" class="on" data-i="d_normal"></button><button data-d="dificil" data-i="d_dificil"></button></div>
+<button class="btn alt" id="nueva" data-i="new"></button>
 </div>
 <div class="status" id="st"></div>
-<div class="row"><button class="btn t" id="robar">Turno del rival · robar carta</button><button class="btn alt" id="bloqueo">Rival bloqueado · carta extra</button><button class="btn alt" id="deshacer">Deshacer</button></div>
-<div id="carta"><div class="card empty">Prepara la partida (pestaña Reglas) y pulsa «Turno del rival» tras cada turno tuyo.</div></div>
+<div class="row"><button class="btn t" id="robar" data-i="draw"></button><button class="btn alt" id="bloqueo" data-i="blocked"></button><button class="btn alt" id="deshacer" data-i="undo"></button></div>
+<div id="carta"></div>
 </section>
 
 <section id="reglas" class="hide">
-<div class="note">Primera versión para probar. Si una regla no resuelve una situación, decide lo más perjudicial para ti, apúntalo en «Registro y notas» y sigue.</div>
 
+<div data-lang="es">
+<div class="note">Primera versión para probar. Si una regla no resuelve una situación, decide lo más perjudicial para ti, apúntalo en «Registro y notas» y sigue.</div>
 <h2>Preparación</h2>
 <ul>
 <li>Prepara una partida normal de <b>2 jugadores</b> (retira del Mercado lo indicado para 2: 4×A, 6×B, 6×C).</li>
@@ -95,15 +100,14 @@ table{border-collapse:collapse;width:100%;font-size:15px}td,th{border-bottom:1px
 <li>Pon <b>un</b> Certificado del rival en la <b>columna 4</b> de una pista de su tablero: su posición marca su <b>nivel de Certificado</b> igual que para ti (columna 6 = nivel 1, 8 = nivel 2, 10 = nivel 3; empieza en nivel 0) y vale para <b>todos</b> los Productos.</li>
 <li>Empiezas tú: eres el jugador <b>1</b> y el rival el <b>2</b>. Mercaderes según la leyenda de cada Ciudad: <b>verde</b>, los dos arriba; <b>naranja</b>, tú abajo y el rival arriba; <b>azul</b>, tú arriba y el rival abajo.</li>
 </ul>
-
 <h2>Turno del rival</h2>
 <p>Pulsa el botón y resuelve la carta <b>en este orden</b>:</p>
 <h3>1 · Mercader</h3>
 <p>En la <b>Ciudad</b> indicada, pasa el Mercader del rival a la <b>otra Zona</b> (de Coste a Beneficio o al revés). Desliza las cartas de la Zona a la que llega como harías tú, descarta la de la izquierda y coloca en el hueco derecho la carta del Mercado en la <b>posición</b> indicada (contando desde la izquierda; si no existe, la última). Rellena el Mercado. El rival <b>no paga ni cobra</b>.</p>
-<p class="fb">Siempre es válido: el rival tiene un Mercader en cada Ciudad. Si tu Mercader está allí, comparten Zona con normalidad.</p>
+<p class="fb">Siempre es válido: el rival tiene un Mercader en cada Ciudad. Si tu Mercader está allí, comparten Zona con normalidad. A diferencia de ti, que puedes llevar cualquier Mercader a cualquier Zona libre, Ghiberti solo cambia de Zona dentro de la Ciudad indicada.</p>
 <h3>2 · Acción principal</h3>
 <ul>
-<li><b>Construir P / M / G</b>: toma, de los 2 Edificios visibles de ese tamaño, el <b>más cercano a su mazo</b> (el de arriba) y repone. Colócalo en la casilla de ese tamaño del <b>lado derecho</b> del tablero; si está ocupada, en el izquierdo. Si no hay Edificio de ese tamaño: tamaño inferior; si tampoco hay: <b>bloqueo</b>.</li>
+<li><b>Construir S / M / L</b>: toma, de los 2 Edificios visibles de ese tamaño, el <b>más cercano a su mazo</b> (el de arriba) y repone. Colócalo en la casilla de ese tamaño del <b>lado derecho</b> del tablero; si está ocupada, en el izquierdo. Si no hay Edificio de ese tamaño: tamaño inferior; si tampoco hay: <b>bloqueo</b>.</li>
 <li><b>Certificado +1 / +2</b>: avanza su Certificado una o dos columnas. Cada paso que no pueda dar por estar al final de la pista: 1 PV.</li>
 <li><b>Preparar</b>: no hace nada salvo los envíos.</li>
 </ul>
@@ -113,46 +117,200 @@ table{border-collapse:collapse;width:100%;font-size:15px}td,th{border-bottom:1px
 <p class="fb">Inválida → Obra válida más alta de la columna → columna siguiente (1→2→3→4→1) → si no hay ninguna: ese envío se pierde y hay <b>bloqueo</b>.</p>
 <h3>Bloqueo</h3>
 <p>Si en este turno el rival no pudo construir o perdió algún envío, pulsa <b>«Rival bloqueado · carta extra»</b>: roba otra carta y resuelve solo su <b>acción principal</b> y sus <b>envíos</b> (sin Mercader ni Mercado). Como máximo una carta extra por turno, y la carta extra no encadena otra. Así, cuanto más lo bloqueas, más fuerte golpea.</p>
-<p>Con nivel 0 el rival <b>no envía</b> (ni gana PV por ello).</p>
+<p>Con nivel 0 el rival <b>no envía</b> (ni gana PV por ello), y no es bloqueo.</p>
 <p>Si el rival es el <b>primero</b> en una Obra, no aplica su efecto: gana <b>1 PV</b>. Si se le acaban las fichas, cada envío da 1 PV.</p>
-
 <h2>Final de partida</h2>
-<p>Como en el reglamento (Mercado agotado). Puntúa al rival en la pestaña Puntuación.</p>
-
+<p>Como en el reglamento (Mercado agotado). En la última ronda el rival no toma cartas del Mercado ni Edificios: solo cambia de Zona y envía. La partida acaba tras el turno de Ghiberti. Puntúa al rival en la pestaña Puntuación (no puntúa Edificios azules ni Productos sobrantes).</p>
 <h2>Desempates fijos</h2>
-<ul><li>Edificios: el más cercano a su mazo.</li><li>Obras: la de nivel más alto de la columna indicada.</li><li>Tú nunca eliges por el rival.</li></ul>
-
+<ul><li>Edificios: el más cercano a su mazo.</li><li>Obras: la de nivel más alto de la columna indicada.</li><li>Tú nunca eliges por el rival; si algo no está claro, aplica lo que más te perjudique.</li></ul>
 <h2>Mazo</h2>
 <table><tr><th>Dificultad</th><th>Cartas</th></tr>
-<tr><td>Fácil</td><td>13: Construir P×2, M×2, G×1, Certificado +1×3, +2×1, Preparar×4</td></tr>
-<tr><td>Normal</td><td>13: Construir P×2, M×2, G×1, Certificado +1×2, +2×2, Preparar×4</td></tr>
-<tr><td>Difícil</td><td>13: Construir P×2, M×2, G×1, Certificado +1×2, +2×3, Preparar×3</td></tr></table>
+<tr><td>Fácil</td><td>13: Construir S×2, M×2, L×1, Certificado +1×3, +2×1, Preparar×4</td></tr>
+<tr><td>Normal</td><td>13: Construir S×2, M×2, L×1, Certificado +1×2, +2×2, Preparar×4</td></tr>
+<tr><td>Difícil</td><td>13: Construir S×2, M×2, L×1, Certificado +1×2, +2×3, Preparar×3</td></tr></table>
 <p class="fb">Al agotarse el mazo se baraja de nuevo.</p>
+</div>
+
+<div data-lang="en">
+<div class="note">Playtest version. If a rule doesn’t cover a situation, choose whatever hurts you most, write it down in “Log &amp; notes” and carry on.</div>
+<h2>Setup</h2>
+<ul>
+<li>Set up a normal <b>2-player</b> game (remove from the Market what the rules say for 2 players: 4×A, 6×B, 6×C).</li>
+<li>The rival takes a colour, a <b>spare Shop Board</b>, its 3 Merchants, its 20 Player Tokens and its Score Marker. It gets no starting Buildings or Goods.</li>
+<li>Place <b>one</b> rival Certificate on <b>column 4</b> of one track of its board: its position sets its <b>Certificate Level</b> just as for you (column 6 = Level 1, 8 = Level 2, 10 = Level 3; it starts at Level 0) and it counts for <b>all</b> Goods.</li>
+<li>You go first: you are player <b>1</b> and the rival is player <b>2</b>. Merchants follow each City’s legend: <b>green</b>, both in the Upper Area; <b>orange</b>, you Lower and the rival Upper; <b>blue</b>, you Upper and the rival Lower.</li>
+</ul>
+<h2>Rival’s turn</h2>
+<p>Press the button and resolve the card <b>in this order</b>:</p>
+<h3>1 · Merchant</h3>
+<p>In the indicated <b>City</b>, move the rival’s Merchant to the <b>other Area</b> (Cost to Profit or vice versa). Slide the cards of the Area it arrives in as you would, discard the leftmost one and place in the right-hand gap the Market card at the indicated <b>position</b> (counting from the left; if it doesn’t exist, the last one). Refill the Market. The rival <b>neither pays nor earns</b>.</p>
+<p class="fb">This is always possible: the rival has one Merchant in each City. If your Merchant is there, they share the Area as normal. Unlike you, who may move any Merchant to any free Area, Ghiberti only switches Area within the indicated City.</p>
+<h3>2 · Main action</h3>
+<ul>
+<li><b>Construct S / M / L</b>: of the 2 visible Buildings of that size, it takes the one <b>closest to its deck</b> (the top one) and refills. Place it on the space of that size on the <b>right side</b> of its board; if that is taken, on the left. If there is no Building of that size: the next smaller size; if there is none either: <b>blocked</b>.</li>
+<li><b>Certificate +1 / +2</b>: advance its Certificate one or two columns. Each step it cannot take because it is at the end of the track: 1 VP.</li>
+<li><b>Prepare</b>: it does nothing except its sends.</li>
+</ul>
+<h3>3 · Sending to the Opera</h3>
+<p>Carts = occupied spaces on the <b>right side</b> (0–3). The card sets a <b>maximum number of sends</b>: Construct 1, Certificate 2, Prepare 3. It sends <b>that maximum or its Carts, whichever is lower</b>, each token to the <b>highest valid Worksite</b> in the indicated <b>column</b>.</p>
+<p>A Worksite is invalid if: it already holds a rival token · a lower Worksite in its column is empty · its level is higher than the rival’s Certificate Level. <b>The Worksite’s type of Good doesn’t matter</b> for the rival.</p>
+<p class="fb">Invalid → highest valid Worksite in the column → next column (1→2→3→4→1) → if there is none: that send is lost and it is <b>blocked</b>.</p>
+<h3>Blocked</h3>
+<p>If this turn the rival could not construct or lost a send, press <b>“Rival blocked · extra card”</b>: draw another card and resolve only its <b>main action</b> and its <b>sends</b> (no Merchant or Market). At most one extra card per turn, and the extra card never chains another. So the more you block it, the harder it hits.</p>
+<p>At Level 0 the rival <b>doesn’t send</b> (and scores nothing for it), and that is not a block.</p>
+<p>If the rival is the <b>first</b> on a Worksite, it doesn’t apply its effect: it scores <b>1 VP</b>. If it runs out of tokens, each send scores 1 VP.</p>
+<h2>End of the game</h2>
+<p>As in the rulebook (Market exhausted). In the Last Round the rival takes no Trade Cards or Buildings: it only switches Area and sends. The game ends after Ghiberti’s turn. Score the rival in the Scoring tab (it doesn’t score blue Buildings or leftover Goods).</p>
+<h2>Fixed tie-breakers</h2>
+<ul><li>Buildings: the one closest to its deck.</li><li>Worksites: the highest one in the indicated column.</li><li>You never choose for the rival; if something is unclear, apply whatever hurts you most.</li></ul>
+<h2>Deck</h2>
+<table><tr><th>Difficulty</th><th>Cards</th></tr>
+<tr><td>Easy</td><td>13: Construct S×2, M×2, L×1, Certificate +1×3, +2×1, Prepare×4</td></tr>
+<tr><td>Normal</td><td>13: Construct S×2, M×2, L×1, Certificate +1×2, +2×2, Prepare×4</td></tr>
+<tr><td>Hard</td><td>13: Construct S×2, M×2, L×1, Certificate +1×2, +2×3, Prepare×3</td></tr></table>
+<p class="fb">When the deck runs out, reshuffle it.</p>
+</div>
+
+<div data-lang="it">
+<div class="note">Versione di prova. Se una regola non copre una situazione, scegli ciò che ti danneggia di più, annotalo in «Registro e note» e prosegui.</div>
+<h2>Preparazione</h2>
+<ul>
+<li>Prepara una normale partita a <b>2 giocatori</b> (togli dal Mercato quanto indicato per 2: 4×A, 6×B, 6×C).</li>
+<li>Il rivale prende un colore, una <b>Plancia Bottega avanzata</b>, i suoi 3 Mercanti, i suoi 20 Segnalini Giocatore e il suo segnapunti. Non riceve Edifici iniziali né Merci.</li>
+<li>Metti <b>un</b> Certificato del rivale sulla <b>colonna 4</b> di un tracciato della sua plancia: la sua posizione indica il suo <b>livello di Certificato</b> come per te (colonna 6 = livello 1, 8 = livello 2, 10 = livello 3; parte dal livello 0) e vale per <b>tutte</b> le Merci.</li>
+<li>Inizi tu: sei il giocatore <b>1</b> e il rivale il <b>2</b>. Mercanti secondo la legenda di ogni Città: <b>verde</b>, entrambi in alto; <b>arancione</b>, tu in basso e il rivale in alto; <b>blu</b>, tu in alto e il rivale in basso.</li>
+</ul>
+<h2>Turno del rivale</h2>
+<p>Premi il pulsante e risolvi la carta <b>in quest’ordine</b>:</p>
+<h3>1 · Mercante</h3>
+<p>Nella <b>Città</b> indicata, sposta il Mercante del rivale nell’<b>altra Area</b> (da Costo a Profitto o viceversa). Fai scorrere le carte dell’Area in cui arriva come faresti tu, scarta quella più a sinistra e metti nello spazio libero a destra la carta del Mercato nella <b>posizione</b> indicata (contando da sinistra; se non esiste, l’ultima). Rifornisci il Mercato. Il rivale <b>non paga né incassa</b>.</p>
+<p class="fb">È sempre possibile: il rivale ha un Mercante in ogni Città. Se il tuo Mercante è lì, condividono l’Area normalmente. A differenza tua, che puoi spostare qualsiasi Mercante in qualsiasi Area libera, Ghiberti cambia Area solo nella Città indicata.</p>
+<h3>2 · Azione principale</h3>
+<ul>
+<li><b>Costruire S / M / L</b>: dei 2 Edifici visibili di quella taglia, prende quello <b>più vicino al suo mazzo</b> (quello in alto) e rifornisce. Mettilo nello spazio di quella taglia sul <b>lato destro</b> della plancia; se è occupato, a sinistra. Se non c’è un Edificio di quella taglia: la taglia inferiore; se non c’è neanche quella: <b>blocco</b>.</li>
+<li><b>Certificato +1 / +2</b>: avanza il suo Certificato di una o due colonne. Ogni passo che non può fare perché è alla fine del tracciato: 1 PV.</li>
+<li><b>Preparare</b>: non fa nulla tranne gli invii.</li>
+</ul>
+<h3>3 · Invii all’Opera</h3>
+<p>Carri = spazi occupati sul <b>lato destro</b> (0–3). La carta indica un <b>massimo di invii</b>: Costruire 1, Certificato 2, Preparare 3. Invia <b>quel massimo o quanti Carri ha, il minore dei due</b>, ogni segnalino al <b>Cantiere valido di livello più alto</b> della <b>colonna</b> indicata.</p>
+<p>Un Cantiere non è valido se: ha già un segnalino del rivale · un Cantiere inferiore della sua colonna è vuoto · il suo livello supera il livello di Certificato del rivale. <b>Il tipo di Merce del Cantiere non conta</b> per il rivale.</p>
+<p class="fb">Non valido → Cantiere valido più alto della colonna → colonna successiva (1→2→3→4→1) → se non ce n’è nessuno: quell’invio è perso e c’è <b>blocco</b>.</p>
+<h3>Blocco</h3>
+<p>Se in questo turno il rivale non ha potuto costruire o ha perso un invio, premi <b>«Rivale bloccato · carta extra»</b>: pesca un’altra carta e risolvi solo la sua <b>azione principale</b> e i suoi <b>invii</b> (senza Mercante né Mercato). Al massimo una carta extra per turno, e la carta extra non ne attiva un’altra. Così, più lo blocchi, più forte colpisce.</p>
+<p>Al livello 0 il rivale <b>non invia</b> (né guadagna PV per questo), e non è blocco.</p>
+<p>Se il rivale è il <b>primo</b> su un Cantiere, non applica il suo effetto: guadagna <b>1 PV</b>. Se finisce i segnalini, ogni invio dà 1 PV.</p>
+<h2>Fine della partita</h2>
+<p>Come nel regolamento (Mercato esaurito). Nell’ultimo round il rivale non prende carte dal Mercato né Edifici: cambia solo Area e invia. La partita finisce dopo il turno di Ghiberti. Calcola il punteggio del rivale nella scheda Punteggio (non conta Edifici blu né Merci avanzate).</p>
+<h2>Spareggi fissi</h2>
+<ul><li>Edifici: quello più vicino al suo mazzo.</li><li>Cantieri: quello di livello più alto della colonna indicata.</li><li>Non scegli mai tu per il rivale; se qualcosa non è chiaro, applica ciò che ti danneggia di più.</li></ul>
+<h2>Mazzo</h2>
+<table><tr><th>Difficoltà</th><th>Carte</th></tr>
+<tr><td>Facile</td><td>13: Costruire S×2, M×2, L×1, Certificato +1×3, +2×1, Preparare×4</td></tr>
+<tr><td>Normale</td><td>13: Costruire S×2, M×2, L×1, Certificato +1×2, +2×2, Preparare×4</td></tr>
+<tr><td>Difficile</td><td>13: Costruire S×2, M×2, L×1, Certificato +1×2, +2×3, Preparare×3</td></tr></table>
+<p class="fb">Quando il mazzo finisce, rimescolalo.</p>
+</div>
 </section>
 
 <section id="puntos" class="hide">
-<h2>Puntuación final del rival</h2>
-<p class="fb">Provisional — apunta en notas si sale muy alta o baja.</p>
+<h2 data-i="score_h"></h2>
+<p class="fb" data-i="score_fb"></p>
 <div class="grid2" id="calc"></div>
-<p>Total: <span class="tot" id="tot">0</span> PV</p>
+<p><span data-i="total"></span>: <span class="tot" id="tot">0</span> <span data-i="vp"></span></p>
 </section>
 
 <section id="registro" class="hide">
-<h2>Nota de prueba</h2>
-<textarea id="nota" rows="3" placeholder="Qué ha pasado, qué no se entendía, qué se ha decidido…"></textarea>
-<div class="row" style="margin-top:8px"><button class="btn" id="addnota">Añadir nota</button><button class="btn alt" id="copiar">Copiar registro</button><span class="status" id="cp"></span></div>
-<h2>Registro</h2>
+<h2 data-i="note_h"></h2>
+<textarea id="nota" rows="3"></textarea>
+<div class="row" style="margin-top:8px"><button class="btn" id="addnota" data-i="add_note"></button><button class="btn alt" id="copiar" data-i="copy_log"></button><span class="status" id="cp"></span></div>
+<h2 data-i="log_h"></h2>
 <div class="log" id="log"></div>
 </section>
+<p class="credit" data-i="credit"></p>
 </div>
 
 <script>
-const SIZES={P:'Pequeño',M:'Mediano',G:'Grande'};
+const I18N={
+es:{sub:'Modo solitario para Opera Magna · v2 — Tú llevas su tablero; la app solo decide.',
+ ctx:'Florencia, 1418. En 1401 Lorenzo Ghiberti derrotó a Brunelleschi en el concurso de las puertas del Baptisterio; ahora comparte con él la dirección de la cúpula de Santa Maria del Fiore. No paga, no espera y no olvida: cada Obra que no reclames, él la hará suya.',
+ tab_game:'Partida',tab_rules:'Reglas',tab_score:'Puntuación',tab_log:'Registro y notas',
+ d_facil:'Fácil',d_normal:'Normal',d_dificil:'Difícil',new:'Nueva partida',draw:'Turno del rival · robar carta',blocked:'Rival bloqueado · carta extra',undo:'Deshacer',
+ empty:'Prepara la partida (pestaña Reglas) y pulsa «Turno del rival» tras cada turno tuyo.',
+ status:(t,n,d)=>`Turno ${t} del rival · ${n} cartas en el mazo · dificultad ${d}`,
+ sizes:{P:'pequeño',M:'mediano',G:'grande'},cities:['Verde','Naranja','Azul'],
+ build:s=>`Construir ${s}`,cert:k=>`Certificado +${k}`,prep:'Preparar',
+ city:'Ciudad',market:'Mercado',col:'Columna Ópera',nth:p=>`${p}ª carta`,extra:'Carta extra · ',
+ extraLi:'<b>Carta extra</b>: ignora Ciudad y Mercado.',
+ merch:(c,p)=>`<b>Mercader</b> → Ciudad ${c}: cámbialo a la <b>otra Zona</b>. Desliza esa Zona, descarta la izquierda, mete la ${p}ª carta del Mercado. Rellena el Mercado.`,
+ buildLi:(a,s)=>`<b>${a}</b>: el Edificio ${s} más cercano a su mazo (el de arriba); repone → casilla ${s} del lado <b>derecho</b>; si ocupada, izquierdo.<div class="fb">Sin Edificio de ese tamaño → tamaño inferior → <i>bloqueo</i>.</div>`,
+ certLi:k=>`<b>Certificado +${k}</b>: avanza ${k===2?'dos columnas':'una columna'} su Certificado.<div class="fb">Cada paso que no pueda dar por estar al final de la pista → <i>1 PV</i>.</div>`,
+ prepLi:'<b>Preparar</b>: sin acción principal.',
+ sendLi:(n,c,c2)=>`<b>Envíos</b>: hasta <b>${n}</b> ficha(s), sin pasar de sus Carros (casillas derechas ocupadas), a la Obra válida más alta de la <b>columna ${c}</b>.<div class="fb">Inválida (ya enviado · planta inferior incompleta · nivel &gt; Certificado) → otra Obra de la columna ${c} → columna ${c2} → … → envío perdido (<i>bloqueo</i>). <b>Si ya tiene ficha en todas las Obras a su alcance, es bloqueo.</b> Primero en una Obra → <i>1 PV</i> en vez del efecto.</div>`,
+ extraBtn:'¿No pudo construir o perdió un envío? → Carta extra',
+ logLine:(t,x,a,c,m,col)=>`T${t}${x?' (extra por bloqueo)':''}: ${a} · Ciudad ${c} · Mercado ${m} · Columna ${col}`,
+ shuffled:'— mazo barajado —',newLog:d=>`=== Nueva partida (${d}) ${new Date().toLocaleString('es-ES')} ===`,
+ empty_log:'Vacío.',score_h:'Puntuación final del rival',score_fb:'Provisional — apunta en notas si sale muy alta o baja.',total:'Total',vp:'PV',
+ fields:['Edificios pequeños (×2)','Edificios medianos (×3)','Edificios grandes (×4)','Nivel de Certificado 0–3 (×4: vale por sus 4 pistas)','Fichas en Obras de nivel 1 (×1)','… nivel 2 (×2)','… nivel 3 (×3)','Jugadores con menos fichas en la Ópera que el rival (×2)','PV acumulados en el marcador','Casillas de su tablero con al menos 1 Edificio (0–6)'],
+ evo:'Evolución del Taller (casillas: 2→1, 3→2, 4→4, 5→7, 6→10)',
+ note_h:'Nota de prueba',ph:'Qué ha pasado, qué no se entendía, qué se ha decidido…',add_note:'Añadir nota',copy_log:'Copiar registro',log_h:'Registro',
+ copied:'Copiado',sel:'Selecciona y copia el texto de arriba',note:'NOTA',scoreTxt:'Puntuación rival',
+ credit:'Diseño: Alberto ML · Modo solitario no oficial, hecho por un fan.'},
+en:{sub:'Solo mode for Opera Magna · v2 — You handle its board; the app only decides.',
+ ctx:'Florence, 1418. In 1401 Lorenzo Ghiberti beat Brunelleschi in the competition for the Baptistery doors; now he shares with him the direction of the dome of Santa Maria del Fiore. He does not pay, does not wait and does not forget: every Worksite you leave unclaimed, he will make his own.',
+ tab_game:'Game',tab_rules:'Rules',tab_score:'Scoring',tab_log:'Log & notes',
+ d_facil:'Easy',d_normal:'Normal',d_dificil:'Hard',new:'New game',draw:'Rival’s turn · draw card',blocked:'Rival blocked · extra card',undo:'Undo',
+ empty:'Set up the game (Rules tab) and press “Rival’s turn” after each of your turns.',
+ status:(t,n,d)=>`Rival turn ${t} · ${n} cards in the deck · ${d} difficulty`,
+ sizes:{P:'Small',M:'Medium',G:'Large'},cities:['Green','Orange','Blue'],
+ build:s=>`Construct ${s}`,cert:k=>`Certificate +${k}`,prep:'Prepare',
+ city:'City',market:'Market',col:'Opera column',nth:p=>['1st','2nd','3rd'][p-1]+' card',extra:'Extra card · ',
+ extraLi:'<b>Extra card</b>: ignore City and Market.',
+ merch:(c,p)=>`<b>Merchant</b> → ${c} City: move it to the <b>other Area</b>. Slide that Area, discard the leftmost card, put in the ${['1st','2nd','3rd'][p-1]} Market card. Refill the Market.`,
+ buildLi:(a,s)=>`<b>${a}</b>: the ${s} Building closest to its deck (the top one); refill → ${s} space on the <b>right</b> side; if taken, the left.<div class="fb">No Building of that size → next smaller size → <i>blocked</i>.</div>`,
+ certLi:k=>`<b>Certificate +${k}</b>: advance its Certificate ${k===2?'two columns':'one column'}.<div class="fb">Each step it cannot take because it is at the end of the track → <i>1 VP</i>.</div>`,
+ prepLi:'<b>Prepare</b>: no main action.',
+ sendLi:(n,c,c2)=>`<b>Sends</b>: up to <b>${n}</b> token(s), never more than its Carts (occupied right-side spaces), to the highest valid Worksite in <b>column ${c}</b>.<div class="fb">Invalid (already sent · lower floor incomplete · level &gt; Certificate) → another Worksite in column ${c} → column ${c2} → … → send lost (<i>blocked</i>). <b>If it already has a token on every Worksite within reach, it is blocked.</b> First on a Worksite → <i>1 VP</i> instead of the effect.</div>`,
+ extraBtn:'Couldn’t construct or lost a send? → Extra card',
+ logLine:(t,x,a,c,m,col)=>`T${t}${x?' (extra, blocked)':''}: ${a} · ${c} City · Market ${m} · Column ${col}`,
+ shuffled:'— deck reshuffled —',newLog:d=>`=== New game (${d}) ${new Date().toLocaleString('en-GB')} ===`,
+ empty_log:'Empty.',score_h:'Rival’s final score',score_fb:'Provisional — add a note if it comes out very high or low.',total:'Total',vp:'VP',
+ fields:['Small Buildings (×2)','Medium Buildings (×3)','Large Buildings (×4)','Certificate Level 0–3 (×4: counts for its 4 tracks)','Tokens on Level 1 Worksites (×1)','… Level 2 (×2)','… Level 3 (×3)','Players with fewer tokens on the Opera than the rival (×2)','VP on the score track','Spaces on its board with at least 1 Building (0–6)'],
+ evo:'Shop Evolution (spaces: 2→1, 3→2, 4→4, 5→7, 6→10)',
+ note_h:'Playtest note',ph:'What happened, what was unclear, what you decided…',add_note:'Add note',copy_log:'Copy log',log_h:'Log',
+ copied:'Copied',sel:'Select and copy the text above',note:'NOTE',scoreTxt:'Rival score',
+ credit:'Design: Alberto ML · Unofficial fan-made solo mode.'},
+it:{sub:'Modalità solitario per Opera Magna · v2 — Tu gestisci la sua plancia; l’app decide soltanto.',
+ ctx:'Firenze, 1418. Nel 1401 Lorenzo Ghiberti batté Brunelleschi nel concorso per le porte del Battistero; ora condivide con lui la direzione della cupola di Santa Maria del Fiore. Non paga, non aspetta e non dimentica: ogni Cantiere che non reclami, lo farà suo.',
+ tab_game:'Partita',tab_rules:'Regole',tab_score:'Punteggio',tab_log:'Registro e note',
+ d_facil:'Facile',d_normal:'Normale',d_dificil:'Difficile',new:'Nuova partita',draw:'Turno del rivale · pesca carta',blocked:'Rivale bloccato · carta extra',undo:'Annulla',
+ empty:'Prepara la partita (scheda Regole) e premi «Turno del rivale» dopo ogni tuo turno.',
+ status:(t,n,d)=>`Turno ${t} del rivale · ${n} carte nel mazzo · difficoltà ${d}`,
+ sizes:{P:'piccolo',M:'medio',G:'grande'},cities:['Verde','Arancione','Blu'],
+ build:s=>`Costruire ${s}`,cert:k=>`Certificato +${k}`,prep:'Preparare',
+ city:'Città',market:'Mercato',col:'Colonna Opera',nth:p=>`${p}ª carta`,extra:'Carta extra · ',
+ extraLi:'<b>Carta extra</b>: ignora Città e Mercato.',
+ merch:(c,p)=>`<b>Mercante</b> → Città ${c}: spostalo nell’<b>altra Area</b>. Fai scorrere quell’Area, scarta quella a sinistra, inserisci la ${p}ª carta del Mercato. Rifornisci il Mercato.`,
+ buildLi:(a,s)=>`<b>${a}</b>: l’Edificio ${s} più vicino al suo mazzo (quello in alto); rifornisci → spazio ${s} sul lato <b>destro</b>; se occupato, sinistro.<div class="fb">Nessun Edificio di quella taglia → taglia inferiore → <i>blocco</i>.</div>`,
+ certLi:k=>`<b>Certificato +${k}</b>: avanza il suo Certificato di ${k===2?'due colonne':'una colonna'}.<div class="fb">Ogni passo che non può fare perché è alla fine del tracciato → <i>1 PV</i>.</div>`,
+ prepLi:'<b>Preparare</b>: nessuna azione principale.',
+ sendLi:(n,c,c2)=>`<b>Invii</b>: fino a <b>${n}</b> segnalino/i, mai più dei suoi Carri (spazi destri occupati), al Cantiere valido più alto della <b>colonna ${c}</b>.<div class="fb">Non valido (già inviato · piano inferiore incompleto · livello &gt; Certificato) → altro Cantiere della colonna ${c} → colonna ${c2} → … → invio perso (<i>blocco</i>). <b>Se ha già un segnalino in tutti i Cantieri alla sua portata, è blocco.</b> Primo su un Cantiere → <i>1 PV</i> invece dell’effetto.</div>`,
+ extraBtn:'Non ha potuto costruire o ha perso un invio? → Carta extra',
+ logLine:(t,x,a,c,m,col)=>`T${t}${x?' (extra per blocco)':''}: ${a} · Città ${c} · Mercato ${m} · Colonna ${col}`,
+ shuffled:'— mazzo rimescolato —',newLog:d=>`=== Nuova partita (${d}) ${new Date().toLocaleString('it-IT')} ===`,
+ empty_log:'Vuoto.',score_h:'Punteggio finale del rivale',score_fb:'Provvisorio — annotalo se risulta molto alto o basso.',total:'Totale',vp:'PV',
+ fields:['Edifici piccoli (×2)','Edifici medi (×3)','Edifici grandi (×4)','Livello di Certificato 0–3 (×4: vale per i suoi 4 tracciati)','Segnalini su Cantieri di livello 1 (×1)','… livello 2 (×2)','… livello 3 (×3)','Giocatori con meno segnalini del rivale sull’Opera (×2)','PV sul segnapunti','Spazi della sua plancia con almeno 1 Edificio (0–6)'],
+ evo:'Evoluzione della Bottega (spazi: 2→1, 3→2, 4→4, 5→7, 6→10)',
+ note_h:'Nota di prova',ph:'Cosa è successo, cosa non era chiaro, cosa hai deciso…',add_note:'Aggiungi nota',copy_log:'Copia registro',log_h:'Registro',
+ copied:'Copiato',sel:'Seleziona e copia il testo qui sopra',note:'NOTA',scoreTxt:'Punteggio rivale',
+ credit:'Design: Alberto ML · Modalità solitario non ufficiale, creata da un fan.'}
+};
+let LANG=(()=>{try{const v=localStorage.getItem('om-lang');if(v&&I18N[v])return v}catch(e){}const n=(navigator.language||'es').slice(0,2);return I18N[n]?n:'en'})();
+const tr=k=>I18N[LANG][k];
 const BASE={
  facil:['B-P','B-P','B-M','B-M','B-G','C','C','C','C2','X','X','X','X'],
  normal:['B-P','B-P','B-M','B-M','B-G','C','C','C2','C2','X','X','X','X'],
  dificil:['B-P','B-P','B-M','B-M','B-G','C','C','C2','C2','C2','X','X','X']};
-const ROMAN=['Verde','Naranja','Azul'];
+const SL={P:'S',M:'M',G:'L'};
 let S={dif:'normal',deck:[],turn:0,round:1,log:[],hist:[],cur:null,score:{}};
 function save(){try{localStorage.setItem('om-rival',JSON.stringify(S))}catch(e){}}
 function load(){try{const v=JSON.parse(localStorage.getItem('om-rival'));if(v&&v.deck)S=Object.assign(S,v)}catch(e){}}
@@ -160,7 +318,6 @@ function rnd(n){return Math.floor(Math.random()*n)}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
 function makeDeck(){
  const acts=shuffle(BASE[S.dif].slice());
- // balance cities, zones and columns across the deck
  const n=acts.length;
  const city=shuffle(Array.from({length:n},(_,i)=>i%3+1));
  const zone=shuffle(Array.from({length:n},(_,i)=>i%2?'Beneficio':'Coste'));
@@ -169,42 +326,45 @@ function makeDeck(){
  return acts.map((a,i)=>({a,city:city[i],zone:zone[i],col:col[i],pos:pos[i]}));
 }
 function actText(c){
- if(c.a.startsWith('B-'))return 'Construir '+SIZES[c.a[2]];
- if(c.a==='C')return 'Certificado +1';
- if(c.a==='C2')return 'Certificado +2';
- return 'Preparar';
+ if(c.a.startsWith('B-'))return tr('build')(SL[c.a[2]]);
+ if(c.a==='C')return tr('cert')(1);
+ if(c.a==='C2')return tr('cert')(2);
+ return tr('prep');
+}
+function applyStatic(){
+ document.documentElement.lang=LANG;
+ document.querySelectorAll('[data-i]').forEach(e=>{const v=tr(e.dataset.i);if(typeof v==='string')e.textContent=v});
+ document.querySelectorAll('[data-lang]').forEach(e=>e.classList.toggle('hide',e.dataset.lang!==LANG));
+ document.querySelectorAll('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===LANG));
+ document.getElementById('nota').placeholder=tr('ph');
+ const g=document.getElementById('calc');g.innerHTML='';
 }
 function render(){
  document.querySelectorAll('#dif button').forEach(b=>b.classList.toggle('on',b.dataset.d===S.dif));
- document.getElementById('st').textContent=`Turno ${S.turn} del rival · ${S.deck.length} cartas en el mazo · dificultad ${S.dif}`;
+ document.getElementById('st').textContent=tr('status')(S.turn,S.deck.length,tr('d_'+S.dif).toLowerCase());
  const c=S.cur,el=document.getElementById('carta');
- if(!c){el.innerHTML='<div class="card empty">Prepara la partida (pestaña Reglas) y pulsa «Turno del rival» tras cada turno tuyo.</div>'}
+ if(!c){el.innerHTML=`<div class="card empty">${tr('empty')}</div>`}
  else{
-  const other=c.zone==='Coste'?'Beneficio':'Coste';
-  const next=ROMAN[c.city%3];
+  const cities=tr('cities');
   let main='';
-  if(c.a.startsWith('B-')){
-   const s=SIZES[c.a[2]];
-   main=`<li><b>${actText(c)}</b>: el Edificio ${s.toLowerCase()} más cercano a su mazo (el de arriba); repone → casilla ${s.toLowerCase()} del lado <b>derecho</b>; si ocupada, izquierdo.<div class="fb">Sin Edificio de ese tamaño → tamaño inferior → <i>bloqueo</i>.</div></li>`;
-  }else if(c.a==='C'||c.a==='C2'){
-   const k=c.a==='C2'?2:1;
-   main=`<li><b>Certificado +${k}</b>: avanza ${k===2?'dos columnas':'una columna'} su Certificado.<div class="fb">Cada paso que no pueda dar por estar al final de la pista → <i>1 PV</i>.</div></li>`;
-  }else main=`<li><b>Preparar</b>: sin acción principal.</li>`;
+  if(c.a.startsWith('B-'))main=`<li>${tr('buildLi')(actText(c),tr('sizes')[c.a[2]])}</li>`;
+  else if(c.a==='C'||c.a==='C2')main=`<li>${tr('certLi')(c.a==='C2'?2:1)}</li>`;
+  else main=`<li>${tr('prepLi')}</li>`;
   el.innerHTML=`<div class="card">
    <div class="top">
-    <div class="f"><small>Ciudad</small><b>${ROMAN[c.city-1]}</b></div>
-    <div class="f"><small>Mercado</small><b>${c.pos}ª carta</b></div>
-    <div class="f"><small>Columna Ópera</small><b>${c.col}</b></div>
+    <div class="f"><small>${tr('city')}</small><b>${cities[c.city-1]}</b></div>
+    <div class="f"><small>${tr('market')}</small><b>${tr('nth')(c.pos)}</b></div>
+    <div class="f"><small>${tr('col')}</small><b>${c.col}</b></div>
    </div>
-   <div class="act">${c.extra?'Carta extra · ':''}${actText(c)}</div>
+   <div class="act">${c.extra?tr('extra'):''}${actText(c)}</div>
    <ol class="steps">
-    ${c.extra?'<li><b>Carta extra</b>: ignora Ciudad y Mercado.</li>':`<li><b>Mercader</b> → Ciudad ${ROMAN[c.city-1]}: cámbialo a la <b>otra Zona</b>. Desliza esa Zona, descarta la izquierda, mete la ${c.pos}ª carta del Mercado. Rellena el Mercado.</li>`}
+    <li>${c.extra?tr('extraLi'):tr('merch')(cities[c.city-1],c.pos)}</li>
     ${main}
-    <li><b>Envíos</b>: hasta <b>${c.a.startsWith('B-')?1:c.a==='X'?3:2}</b> ficha(s), sin pasar de sus Carros (casillas derechas ocupadas), a la Obra válida más alta de la <b>columna ${c.col}</b>.<div class="fb">Inválida (ya enviado · planta inferior incompleta · nivel &gt; Certificado) → otra Obra de la columna ${c.col} → columna ${c.col%4+1} → … → envío perdido (<i>bloqueo</i>). <b>Si ya tiene ficha en todas las Obras a su alcance, es bloqueo.</b> Primero en una Obra → <i>1 PV</i> en vez del efecto.</div></li>
-   </ol>${(!c.extra&&!c.blocked)?'<div class="row" style="margin-top:12px"><button class="btn t" onclick="draw(true)">¿No pudo construir o perdió un envío? → Carta extra</button></div>':''}</div>`;
+    <li>${tr('sendLi')(c.a.startsWith('B-')?1:c.a==='X'?3:2,c.col,c.col%4+1)}</li>
+   </ol>${(!c.extra&&!c.blocked)?`<div class="row" style="margin-top:12px"><button class="btn t" onclick="draw(true)">${tr('extraBtn')}</button></div>`:''}</div>`;
  }
  const lg=document.getElementById('log');
- lg.innerHTML=S.log.length?S.log.map(l=>`<div class="${l.startsWith('NOTA')?'n':''}">${esc(l)}</div>`).join(''):'<div class="fb">Vacío.</div>';
+ lg.innerHTML=S.log.length?S.log.map(l=>`<div class="${/^(NOTA|NOTE)/.test(l)?'n':''}">${esc(l)}</div>`).join(''):`<div class="fb">${tr('empty_log')}</div>`;
  lg.scrollTop=lg.scrollHeight;
  renderCalc();save();
 }
@@ -214,39 +374,35 @@ function draw(extra){
  if(extra)S.cur.blocked=true;
  S.hist.push(JSON.stringify({deck:S.deck,turn:S.turn,cur:S.cur,log:S.log.length}));
  if(S.hist.length>30)S.hist.shift();
- if(!S.deck.length){S.deck=makeDeck();S.log.push('— mazo barajado —')}
+ if(!S.deck.length){S.deck=makeDeck();S.log.push(tr('shuffled'))}
  S.cur=S.deck.shift();if(extra)S.cur.extra=true;else S.turn++;
  const c=S.cur;
- S.log.push(`T${S.turn}${extra?' (extra por bloqueo)':''}: ${actText(c)} · Ciudad ${ROMAN[c.city-1]} · Mercado ${c.pos} · Columna ${c.col}`);
+ S.log.push(tr('logLine')(S.turn,extra,actText(c),tr('cities')[c.city-1],c.pos,c.col));
  render();
 }
 function undo(){const h=S.hist.pop();if(!h)return;const v=JSON.parse(h);S.deck=v.deck;S.turn=v.turn;S.cur=v.cur;S.log=S.log.slice(0,v.log);render()}
 function nueva(){
  S.deck=makeDeck();S.turn=0;S.cur=null;S.hist=[];S.score={};
- S.log.push(`=== Nueva partida (${S.dif}) ${new Date().toLocaleString('es-ES')} ===`);render();
+ S.log.push(tr('newLog')(tr('d_'+S.dif)));render();
 }
-const FIELDS=[
- ['bp','Edificios pequeños (×2)',2],['bm','Edificios medianos (×3)',3],['bg','Edificios grandes (×4)',4],
- ['cert','Nivel de Certificado 0–3 (×4: vale por sus 4 pistas)',4],
- ['o1','Fichas en Obras de nivel 1 (×1)',1],['o2','… nivel 2 (×2)',2],['o3','… nivel 3 (×3)',3],
- ['op','Jugadores con menos fichas en la Ópera que el rival (×2)',2],
- ['pv','PV acumulados en el marcador',1],
- ['pos','Casillas de su tablero con al menos 1 Edificio (0–6)',0]];
+const FIELDS=[['bp',2],['bm',3],['bg',4],['cert',4],['o1',1],['o2',2],['o3',3],['op',2],['pv',1],['pos',0]];
 const EVO={0:0,1:0,2:1,3:2,4:4,5:7,6:10};
 function renderCalc(){
  const g=document.getElementById('calc');
  if(!g.childElementCount){
-  g.innerHTML=FIELDS.map(([k,l])=>`<label for="f-${k}">${l}</label><input type="number" min="0" id="f-${k}" data-k="${k}">`).join('')+
-  `<label>Evolución del Taller (casillas: 2→1, 3→2, 4→4, 5→7, 6→10)</label><span id="evo">0</span>`;
+  const lab=tr('fields');
+  g.innerHTML=FIELDS.map(([k],i)=>`<label for="f-${k}">${lab[i]}</label><input type="number" min="0" id="f-${k}" data-k="${k}">`).join('')+
+  `<label>${tr('evo')}</label><span id="evo">0</span>`;
   g.querySelectorAll('input').forEach(i=>i.addEventListener('input',()=>{S.score[i.dataset.k]=+i.value||0;renderCalc()}));
  }
  g.querySelectorAll('input').forEach(i=>{if(document.activeElement!==i)i.value=S.score[i.dataset.k]||''});
  const v=k=>S.score[k]||0;
  const evo=EVO[Math.min(v('pos'),6)]||0;
  document.getElementById('evo').textContent=evo;
- let t=evo;FIELDS.forEach(([k,,m])=>t+=v(k)*m);
+ let t=evo;FIELDS.forEach(([k,m])=>t+=v(k)*m);
  document.getElementById('tot').textContent=t;
 }
+document.getElementById('lang').addEventListener('click',e=>{const l=e.target.dataset.l;if(!l)return;LANG=l;try{localStorage.setItem('om-lang',l)}catch(_){}applyStatic();render()});
 document.getElementById('tabs').addEventListener('click',e=>{const t=e.target.dataset.t;if(!t)return;
  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
  ['juego','reglas','puntos','registro'].forEach(id=>document.getElementById(id).classList.toggle('hide',id!==t));});
@@ -256,13 +412,13 @@ document.getElementById('robar').onclick=()=>draw(false);
 document.getElementById('bloqueo').onclick=()=>draw(true);
 document.getElementById('deshacer').onclick=undo;
 document.getElementById('addnota').onclick=()=>{const t=document.getElementById('nota');if(!t.value.trim())return;
- S.log.push(`NOTA (T${S.turn}): ${t.value.trim()}`);t.value='';render()};
+ S.log.push(`${tr('note')} (T${S.turn}): ${t.value.trim()}`);t.value='';render()};
 document.getElementById('copiar').onclick=async()=>{
- const txt=S.log.join('\n')+`\n\nPuntuación rival: ${document.getElementById('tot').textContent} PV `+JSON.stringify(S.score);
+ const txt=S.log.join('\n')+`\n\n${tr('scoreTxt')}: ${document.getElementById('tot').textContent} ${tr('vp')} `+JSON.stringify(S.score);
  const cp=document.getElementById('cp');
- try{await navigator.clipboard.writeText(txt);cp.textContent='Copiado'}catch(e){
-  const t=document.getElementById('nota');t.value=txt;t.select();cp.textContent='Selecciona y copia el texto de arriba'}};
-load();if(!S.deck.length&&!S.cur)S.deck=makeDeck();render();
+ try{await navigator.clipboard.writeText(txt);cp.textContent=tr('copied')}catch(e){
+  const t=document.getElementById('nota');t.value=txt;t.select();cp.textContent=tr('sel')}};
+load();if(!S.deck.length&&!S.cur)S.deck=makeDeck();applyStatic();render();
 </script>
 
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
